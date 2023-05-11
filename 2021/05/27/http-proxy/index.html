@@ -17,20 +17,20 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"zyf0201.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"blog.zhangyefeng.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="在政府金融行业，或者一些特殊的网络隔离情况下，内网主机是无法访问互联网的，这个时候就需要特定的正向代理服务器才能实现连接互联网的需求。Nginx是一个异步框架的网页服务器，也可以用作反向代理、负载平衡器和HTTP缓存，同时，Nginx也可以作为一个正向代理服务器。  HTTP &#x2F; HTTPS 正向代理的分类 按客户端有无感知的分类  普通代理：在客户端需要在浏览器中或者系统环境变量手动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置HTTP正向代理服务器">
-<meta property="og:url" content="https://zyf0201.github.io/2021/05/27/http-proxy/index.html">
+<meta property="og:url" content="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/index.html">
 <meta property="og:site_name" content="叶落">
 <meta property="og:description" content="在政府金融行业，或者一些特殊的网络隔离情况下，内网主机是无法访问互联网的，这个时候就需要特定的正向代理服务器才能实现连接互联网的需求。Nginx是一个异步框架的网页服务器，也可以用作反向代理、负载平衡器和HTTP缓存，同时，Nginx也可以作为一个正向代理服务器。  HTTP &#x2F; HTTPS 正向代理的分类 按客户端有无感知的分类  普通代理：在客户端需要在浏览器中或者系统环境变量手动">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://zyf0201.github.io/2021/05/27/http-proxy/web_proxy.png">
-<meta property="og:image" content="https://zyf0201.github.io/2021/05/27/http-proxy/https-proxy.png">
-<meta property="og:image" content="https://zyf0201.github.io/2021/05/27/http-proxy/web_tunnel.png">
-<meta property="og:image" content="https://zyf0201.github.io/2021/05/27/http-proxy/curl_proxy_stream.png">
+<meta property="og:image" content="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/web_proxy.png">
+<meta property="og:image" content="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/https-proxy.png">
+<meta property="og:image" content="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/web_tunnel.png">
+<meta property="og:image" content="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/curl_proxy_stream.png">
 <meta property="article:published_time" content="2021-05-27T02:17:55.000Z">
 <meta property="article:modified_time" content="2022-08-22T16:20:35.003Z">
 <meta property="article:author" content="Michael Zhang">
@@ -38,9 +38,9 @@
 <meta property="article:tag" content="nginx">
 <meta property="article:tag" content="http proxy">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zyf0201.github.io/2021/05/27/http-proxy/web_proxy.png">
+<meta name="twitter:image" content="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/web_proxy.png">
 
-<link rel="canonical" href="https://zyf0201.github.io/2021/05/27/http-proxy/">
+<link rel="canonical" href="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/">
 
 
 <script id="page-configurations">
@@ -159,7 +159,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://zyf0201.github.io/2021/05/27/http-proxy/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -416,12 +416,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -448,7 +448,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
