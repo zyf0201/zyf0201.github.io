@@ -17,20 +17,20 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.zhangyefeng.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"blog.zhangyefeng.life","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="I am always here!!!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="叶落">
-<meta property="og:url" content="https://blog.zhangyefeng.cn/index.html">
+<meta property="og:url" content="https://blog.zhangyefeng.life/index.html">
 <meta property="og:site_name" content="叶落">
 <meta property="og:description" content="I am always here!!!">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Michael Zhang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://blog.zhangyefeng.cn/">
+<link rel="canonical" href="https://blog.zhangyefeng.life/">
 
 
 <script id="page-configurations">
@@ -148,7 +148,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2023/05/11/51-yunnan-travel/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2023/10/17/hysteria-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Michael Zhang">
+      <meta itemprop="description" content="I am always here!!!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶落">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/17/hysteria-install/" class="post-title-link" itemprop="url">Hysteria2介绍及安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-10-17 02:06:12" itemprop="dateCreated datePublished" datetime="2023-10-17T02:06:12+08:00">2023-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-11 22:19:17" itemprop="dateModified" datetime="2023-11-11T22:19:17+08:00">2023-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Hysteria介绍"><a href="#Hysteria介绍" class="headerlink" title="Hysteria介绍"></a>Hysteria介绍</h2><p><a target="_blank" rel="noopener" href="https://v2.hysteria.network/zh/">Hysteria</a> 是一个强大、快速、抗审查的代理工具。</p>
+<p>今天测试了一下，跟传统的协议相比，hysteria协议的速度很快，打开youtube 4K毫无压力，各位童靴可以试试。在这里简单的说一下centos7系统的安装步骤，建议直接查看<a target="_blank" rel="noopener" href="https://v2.hysteria.network/zh/docs/getting-started/Installation/">文档</a>操作。</p>
+<h2 id="安装Hysteria"><a href="#安装Hysteria" class="headerlink" title="安装Hysteria"></a>安装Hysteria</h2><p>一键安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -fsSL https://get.hy2.sh/)</span><br></pre></td></tr></table></figure>
+
+<p>前提条件：</p>
+<ul>
+<li>一个带公网IP的VPS，your.IP</li>
+<li>一个指向该公网IP的域名，your.domain.net</li>
+</ul>
+<p>服务端配置：</p>
+<ul>
+<li><p>首先编辑配置文件,以下配置可以使用 ACME 自动获取域名的 TLS 证书，详细配置信息可以参考<a target="_blank" rel="noopener" href="https://v2.hysteria.network/zh/docs/advanced/Full-Server-Config/">这里</a>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># listen: :443 </span></span><br><span class="line"><span class="attr">acme:</span></span><br><span class="line">  <span class="attr">domains:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">your.domain.net</span> <span class="comment">#改为你自己的域名</span></span><br><span class="line">  <span class="attr">email:</span> <span class="string">your@email.com</span> </span><br><span class="line"></span><br><span class="line"><span class="attr">auth:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">password</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">Se7RAuFZ8Lzg</span> <span class="comment"># 密码可以自定义</span></span><br><span class="line"></span><br><span class="line"><span class="attr">masquerade:</span> </span><br><span class="line">  <span class="attr">type:</span> <span class="string">proxy</span></span><br><span class="line">  <span class="attr">proxy:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://news.ycombinator.com/</span> </span><br><span class="line">    <span class="attr">rewriteHost:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑好配置文件放置到这个目录：&#x2F;etc&#x2F;hysteria&#x2F;config.yaml</p>
+</li>
+</ul>
+<p>启动服务端的Hysteria服务(启动前建议确认防火墙配置):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start hysteria-server.service </span><br></pre></td></tr></table></figure>
+
+<p>如果启动失败，可以用下面的命令行启动并查看日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/hysteria server --config /etc/hysteria/config.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><p>这边介绍v2rayN和shadowRotcket的客户端配置</p>
+<ul>
+<li>v2rayN(windows)<br>新增配置文件，并保存为config.yaml文件：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span> <span class="string">xx.xx.xx.xx:443</span> <span class="comment">#改为你VM的IP</span></span><br><span class="line"></span><br><span class="line"><span class="attr">auth:</span> <span class="string">xxx</span> <span class="comment">#改成你对应的password</span></span><br><span class="line"></span><br><span class="line"><span class="attr">bandwidth:</span> </span><br><span class="line">  <span class="attr">up:</span> <span class="number">20</span> <span class="string">mbps</span></span><br><span class="line">  <span class="attr">down:</span> <span class="number">100</span> <span class="string">mbps</span></span><br><span class="line"></span><br><span class="line"><span class="attr">socks5:</span></span><br><span class="line">  <span class="attr">listen:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:10808</span> <span class="comment">#对应的代理端口</span></span><br><span class="line"></span><br><span class="line"><span class="attr">http:</span></span><br><span class="line">  <span class="attr">listen:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:10809</span> </span><br><span class="line"><span class="attr">tls:</span></span><br><span class="line">  <span class="attr">insecure:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">sni:</span> <span class="string">xxx.xxx.com</span> <span class="comment">#对应的域名地址</span></span><br><span class="line"></span><br><span class="line"><span class="attr">quic:</span></span><br><span class="line">  <span class="attr">initStreamReceiveWindow:</span> <span class="number">16777216</span></span><br><span class="line">  <span class="attr">maxStreamReceiveWindow:</span> <span class="number">16777216</span></span><br><span class="line">  <span class="attr">initConnReceiveWindow:</span> <span class="number">33554432</span></span><br><span class="line">  <span class="attr">maxConnReceiveWindow:</span> <span class="number">33554432</span></span><br><span class="line"></span><br><span class="line"><span class="attr">fastOpen:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>更新hysteria核心文件：<br>根据你的操作系统下载<a target="_blank" rel="noopener" href="https://github.com/apernet/hysteria/releases">hesteria核心文件</a>,并保存到v2rayN-Home目录\bin\hysteria\</p>
+<img src="/2023/10/17/hysteria-install/core-file.png" class="" title="core file">
+
+
+<p>新增配置：<br>路径：服务器-添加自定义配置服务器</p>
+<img src="/2023/10/17/hysteria-install/v2rayN-hesteria-config.png" class="" title="v2rayN-hesteria-config">
+
+<ul>
+<li><p>ShadowSocket配置<br>需要更新为支持hesteria2协议的版本</p>
+<img src="/2023/10/17/hysteria-install/v2rayN-hesteria-config.png" class="" title="v2rayN-hesteria-config">
+</li>
+<li><p>如需完整的客户端配置文件，请参考：<br><a target="_blank" rel="noopener" href="https://v2.hysteria.network/zh/docs/advanced/Full-Client-Config/">完整客户端配置</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2023/05/11/51-yunnan-travel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -179,7 +285,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-12 00:15:11" itemprop="dateModified" datetime="2023-05-12T00:15:11+08:00">2023-05-12</time>
+                <time title="Modified: 2023-10-24 01:58:16" itemprop="dateModified" datetime="2023-10-24T01:58:16+08:00">2023-10-24</time>
               </span>
 
           
@@ -199,27 +305,55 @@
 - 形式：自驾游(别克GL8)
 - 人数：5
 </code></pre>
-<img src="/2023/05/11/51-yunnan-travel/travel-route.png" class="旅游总路线">
-<img src="/2023/05/11/51-yunnan-travel/travel-excel-plan.png" class="旅游计划">
-<img src="/2023/05/11/51-yunnan-travel/travel-lijiang.png" class="旅游丽江">
-<img src="/2023/05/11/51-yunnan-travel/travel-erhai.png" class="旅游洱海">
+<img src="/2023/05/11/51-yunnan-travel/travel-route.png" class="" title="旅游总路线">
+<img src="/2023/05/11/51-yunnan-travel/travel-excel-plan.png" class="" title="旅游计划">
+<img src="/2023/05/11/51-yunnan-travel/travel-lijiang.png" class="" title="旅游丽江">
+<img src="/2023/05/11/51-yunnan-travel/travel-erhai.png" class="" title="旅游洱海">
 
 
 <h1 id="出发昆明"><a href="#出发昆明" class="headerlink" title="出发昆明"></a>出发昆明</h1><p>为了这次的游玩，早早得提交了年假申请，4月26日当天，一下班，就匆匆赶往萧山机场，因为航班延误，我们到达昆明的时间预计得到凌晨一点后。</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-flight.jpg" class="航班">
+<img src="/2023/05/11/51-yunnan-travel/travel-flight.jpg" class="" title="航班">
 <p>到达昆明后，我们的第一时间就是去机场取车，取车地点就在机场停车场，非常得方便。现场有两辆GL8供我们选择，大概看了一下，我们选择了形势里程数较小的那辆车。</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-gl8.jpg" class="租车">
+<img src="/2023/05/11/51-yunnan-travel/travel-gl8.jpg" class="" title="租车">
 <p>当我们把车开出去的时候，小伙伴发现车辆有些问题，只有踩油门的时候车辆才会前进，搞了半天，原来是脚刹没放(囧)。<br>我们到达昆明后的民宿离机场很近，大概十几分钟车程，等我们办理好入住，已经是凌晨两点多，草草洗漱后就睡下准备迎接五一游的第一天，还有我们还有一个小伙伴要比我们晚到一天，明天的计划是游玩昆明后然后去大理跟最后一个小伙伴集合。</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-pusu.jpg" class="昆明民宿">
+<img src="/2023/05/11/51-yunnan-travel/travel-pusu.jpg" class="" title="昆明民宿">
 
 <h1 id="五一游-day01"><a href="#五一游-day01" class="headerlink" title="五一游-day01"></a>五一游-day01</h1><p>第一天路线图：</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-day01.png" class="云南day01">
+<img src="/2023/05/11/51-yunnan-travel/travel-day01.png" class="" title="云南day01">
 
 <p>到达昆明的第二天，我们睡到了上午十点才起床，收拾一下后，我们吃了碗云南的米粉，然后便出发前往昆明第一个打卡点-蓝楹花公园，这是个网红打卡点，路的两边开满了蓝楹花，非常适合航拍。</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-lanyinghua01.jpg" class="蓝楹花公园">
-<img src="/2023/05/11/51-yunnan-travel/travel-lanyinghua02.jpg" class="蓝楹花公园">
+<img src="/2023/05/11/51-yunnan-travel/travel-lanyinghua01.jpg" class="" title="蓝楹花公园">
 
-<p>仅仅第一个景点，我们逛完</p>
+<p>仅仅第一个景点，我们逛完就已经到1点左右，由于我们还要赶去大理，昆明到大理需要近4个小时车程。</p>
+<p>我们买了点吃的就驱车前往大理，到达大理后我们首先来到了凤阳邑茶马古道，这里是电视剧《去有风的地方》的取景地，热度红极一时。</p>
+<img src="/2023/05/11/51-yunnan-travel/youfeng01.jpg" class="" title="有风小院">
+
+<p>在大理古城安顿下来后，开始随意逛街，古城的夜晚很美，目前来说游客不是很多。</p>
+<img src="/2023/05/11/51-yunnan-travel/dali01.jpg" class="" title="大理">
+<img src="/2023/05/11/51-yunnan-travel/dali02.jpg" class="" title="大理">
+<p>古城内有很多酒吧、饭馆还有水果摊，有一种颜色非常鲜艳的果子，记得不要吃，含有大量色素。</p>
+<img src="/2023/05/11/51-yunnan-travel/dali03.jpg" class="" title="大理酒吧">
+<p>逛完古城后我们在酒吧听歌喝酒，准备第二天的行程</p>
+<h1 id="五一游-day02"><a href="#五一游-day02" class="headerlink" title="五一游-day02"></a>五一游-day02</h1><img src="/2023/05/11/51-yunnan-travel/day02.png" class="" title="云南day01">
+<p>第二天的最终目的地是丽江古城，我们首先去了崇圣寺三塔，景区门口有票贩子，这个景区内部有三座高塔屹立，进入景区后突降大雨，云南的气候非常多变，时而阳光明媚，时而细雨飘泊。等雨停后我们在此拍照打卡，然后就赶往洱海周边游玩。</p>
+<img src="/2023/05/11/51-yunnan-travel/santa01.jpg" class="" title="崇圣寺三塔">
+<img src="/2023/05/11/51-yunnan-travel/santa02.jpg" class="" title="崇圣寺三塔">
+<p>洱海周边都是旅游景点，建议在此逗留两天时间游玩，因为我们的行程比较赶，所以只能走马观花。<br>S弯-电视剧《去有风的地方》取景点：</p>
+<img src="/2023/05/11/51-yunnan-travel/Swan01.jpg" class="" title="崇圣寺三塔">
+
+<p>洱海周边的桃源码头：</p>
+<img src="/2023/05/11/51-yunnan-travel/erhai01.jpg" class="" title="洱海周边的一个码头">
+
+<h1 id="五一游-day03"><a href="#五一游-day03" class="headerlink" title="五一游-day03"></a>五一游-day03</h1><img src="/2023/05/11/51-yunnan-travel/day03.png" class="" title="云南day01">
+
+
+<h1 id="五一游-day04"><a href="#五一游-day04" class="headerlink" title="五一游-day04"></a>五一游-day04</h1><img src="/2023/05/11/51-yunnan-travel/day04.png" class="" title="云南day01">
+<h1 id="五一游-day05"><a href="#五一游-day05" class="headerlink" title="五一游-day05"></a>五一游-day05</h1><img src="/2023/05/11/51-yunnan-travel/day05.png" class="" title="云南day01">
+<h1 id="五一游-day06"><a href="#五一游-day06" class="headerlink" title="五一游-day06"></a>五一游-day06</h1><img src="/2023/05/11/51-yunnan-travel/day06.png" class="" title="云南day01">
+
+
+
+
 
       
     </div>
@@ -239,7 +373,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2022/09/03/book-of-changes-01/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2022/09/03/book-of-changes-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -326,7 +460,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2022/08/23/talk-about-web3-01/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2022/08/23/talk-about-web3-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -443,7 +577,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2021/10/21/iOS-distribution-introduce/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/10/21/iOS-distribution-introduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -559,7 +693,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2021/09/09/github-dev/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/09/09/github-dev/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -629,7 +763,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2021/05/27/http-proxy/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/05/27/http-proxy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -807,7 +941,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2021/04/04/js-learning01/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/04/04/js-learning01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -871,7 +1005,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2021/03/26/vpc-design01/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/03/26/vpc-design01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -964,7 +1098,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2021/03/16/talk-about-mining/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/03/16/talk-about-mining/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1010,104 +1144,6 @@
 
       
           
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.cn/2021/03/16/kubecm-introduce/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Michael Zhang">
-      <meta itemprop="description" content="I am always here!!!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶落">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/16/kubecm-introduce/" class="post-title-link" itemprop="url">使用kubecm管理多个Kubernetes集群</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-16 19:23:07" itemprop="dateCreated datePublished" datetime="2021-03-16T19:23:07+08:00">2021-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-08-23 00:20:35" itemprop="dateModified" datetime="2022-08-23T00:20:35+08:00">2022-08-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>最近遇到需要切换多个Kubernetes集群的场景，发现了kubecm这个工具，可以轻松管理你的Kubeconfig文件，github地址：<a target="_blank" rel="noopener" href="https://github.com/sunny0826/kubecm">https://github.com/sunny0826/kubecm</a></p>
-</blockquote>
-<h2 id="Kubecm安装"><a href="#Kubecm安装" class="headerlink" title="Kubecm安装"></a>Kubecm安装</h2><ul>
-<li><p>Macos安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install kubecm</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>二进制下载安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># linux x86_64</span></span><br><span class="line">curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v<span class="variable">$&#123;VERSION&#125;</span>/kubecm_<span class="variable">$&#123;VERSION&#125;</span>_Linux_x86_64.tar.gz</span><br><span class="line"><span class="comment"># macos</span></span><br><span class="line">curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v<span class="variable">$&#123;VERSION&#125;</span>/kubecm_<span class="variable">$&#123;VERSION&#125;</span>_Darwin_x86_64.tar.gz</span><br><span class="line"><span class="comment"># windows</span></span><br><span class="line">curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v<span class="variable">$&#123;VERSION&#125;</span>/kubecm_<span class="variable">$&#123;VERSION&#125;</span>_Windows_x86_64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># linux &amp; macos</span></span><br><span class="line">tar -zxvf kubecm.tar.gz kubecm</span><br><span class="line"><span class="built_in">cd</span> kubecm</span><br><span class="line">sudo <span class="built_in">mv</span> kubecm /usr/local/bin/</span><br><span class="line"></span><br><span class="line"><span class="comment"># windows</span></span><br><span class="line"><span class="comment"># Unzip kubecm.tar.gz</span></span><br><span class="line"><span class="comment"># Add the binary in to your $PATH</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Kubecm-使用"><a href="#Kubecm-使用" class="headerlink" title="Kubecm 使用"></a>Kubecm 使用</h2><ul>
-<li><p>Kubecm用法</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">  kubecm [flags]</span><br><span class="line">  kubecm [command]</span><br><span class="line"></span><br><span class="line">Available Commands:</span><br><span class="line">    add         Merge configuration file with $HOME/.kube/config</span><br><span class="line">    alias       Generate alias for all contexts</span><br><span class="line">    clear       Clear lapsed context, cluster and user</span><br><span class="line">    completion  Generates bash/zsh completion scripts</span><br><span class="line">    create      Create new KubeConfig(experiment)</span><br><span class="line">    delete      Delete the specified context from the kubeconfig</span><br><span class="line">    help        Help about any command</span><br><span class="line">    list        List kubeconfig</span><br><span class="line">    merge       Merge the kubeconfig files in the specified directory</span><br><span class="line">    namespace   Switch or change namespace interactively</span><br><span class="line">    rename      Rename the contexts of kubeconfig</span><br><span class="line">    switch      Switch Kube Context interactively</span><br><span class="line">    version     Print version info</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flags:</span><br><span class="line">      --config string   path of kubeconfig (default &quot;$HOME/.kube/config&quot;)</span><br><span class="line">  -h, --help   help for kubecm</span><br><span class="line"></span><br><span class="line">Use &quot;kubecm [command] --help&quot; for more information about a command.</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加集群连接信息<br>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubecm add -f test.yaml  <span class="comment">## test.yaml为Kubernets集群的连接信息</span></span><br></pre></td></tr></table></figure>
-<p>输入上述命令后会提示是否覆盖$HOME&#x2F;.kube&#x2F;config文件，如果选择flase，则会在本地生成.&#x2F;config.yaml</p>
-</li>
-<li><p>罗列所有集群信息</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubecm list</span><br></pre></td></tr></table></figure>
-<img src="/2021/03/16/kubecm-introduce/1.png" class="" title="kubecm-list">
-
-<ul>
-<li><p>切换集群</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubecm switch</span><br></pre></td></tr></table></figure>
-<p>根据箭头切换集群信息</p>
-</li>
-<li><p>删除集群</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubecm delete</span><br></pre></td></tr></table></figure>
-<p>根据箭头删除对应的集群</p>
-</li>
-</ul>
-
       
     </div>
 
@@ -1191,12 +1227,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -1223,7 +1259,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
