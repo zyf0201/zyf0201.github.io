@@ -13,13 +13,19 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://blog.zhangyefeng.cn
+url: https://blog.zhangyefeng.life
 #url: https://zyf0201.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
+
+# Hide article
+hide_posts:
+  enable: true
+  filter: hidden
+  noindex: true
 
 # Directory
 source_dir: source
