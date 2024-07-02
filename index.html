@@ -148,435 +148,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2023/10/17/hysteria-install/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Michael Zhang">
-      <meta itemprop="description" content="I am always here!!!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶落">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/17/hysteria-install/" class="post-title-link" itemprop="url">Hysteria2介绍及安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-10-17 02:06:12" itemprop="dateCreated datePublished" datetime="2023-10-17T02:06:12+08:00">2023-10-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-11 22:19:17" itemprop="dateModified" datetime="2023-11-11T22:19:17+08:00">2023-11-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Hysteria介绍"><a href="#Hysteria介绍" class="headerlink" title="Hysteria介绍"></a>Hysteria介绍</h2><p><a target="_blank" rel="noopener" href="https://v2.hysteria.network/zh/">Hysteria</a> 是一个强大、快速、抗审查的代理工具。</p>
-<p>今天测试了一下，跟传统的协议相比，hysteria协议的速度很快，打开youtube 4K毫无压力，各位童靴可以试试。在这里简单的说一下centos7系统的安装步骤，建议直接查看<a target="_blank" rel="noopener" href="https://v2.hysteria.network/zh/docs/getting-started/Installation/">文档</a>操作。</p>
-<h2 id="安装Hysteria"><a href="#安装Hysteria" class="headerlink" title="安装Hysteria"></a>安装Hysteria</h2><p>一键安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -fsSL https://get.hy2.sh/)</span><br></pre></td></tr></table></figure>
-
-<p>前提条件：</p>
-<ul>
-<li>一个带公网IP的VPS，your.IP</li>
-<li>一个指向该公网IP的域名，your.domain.net</li>
-</ul>
-<p>服务端配置：</p>
-<ul>
-<li><p>首先编辑配置文件,以下配置可以使用 ACME 自动获取域名的 TLS 证书，详细配置信息可以参考<a target="_blank" rel="noopener" href="https://v2.hysteria.network/zh/docs/advanced/Full-Server-Config/">这里</a>：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># listen: :443 </span></span><br><span class="line"><span class="attr">acme:</span></span><br><span class="line">  <span class="attr">domains:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">your.domain.net</span> <span class="comment">#改为你自己的域名</span></span><br><span class="line">  <span class="attr">email:</span> <span class="string">your@email.com</span> </span><br><span class="line"></span><br><span class="line"><span class="attr">auth:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">password</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">Se7RAuFZ8Lzg</span> <span class="comment"># 密码可以自定义</span></span><br><span class="line"></span><br><span class="line"><span class="attr">masquerade:</span> </span><br><span class="line">  <span class="attr">type:</span> <span class="string">proxy</span></span><br><span class="line">  <span class="attr">proxy:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://news.ycombinator.com/</span> </span><br><span class="line">    <span class="attr">rewriteHost:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>编辑好配置文件放置到这个目录：&#x2F;etc&#x2F;hysteria&#x2F;config.yaml</p>
-</li>
-</ul>
-<p>启动服务端的Hysteria服务(启动前建议确认防火墙配置):</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start hysteria-server.service </span><br></pre></td></tr></table></figure>
-
-<p>如果启动失败，可以用下面的命令行启动并查看日志：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/hysteria server --config /etc/hysteria/config.yaml</span><br></pre></td></tr></table></figure>
-
-<h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><p>这边介绍v2rayN和shadowRotcket的客户端配置</p>
-<ul>
-<li>v2rayN(windows)<br>新增配置文件，并保存为config.yaml文件：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span> <span class="string">xx.xx.xx.xx:443</span> <span class="comment">#改为你VM的IP</span></span><br><span class="line"></span><br><span class="line"><span class="attr">auth:</span> <span class="string">xxx</span> <span class="comment">#改成你对应的password</span></span><br><span class="line"></span><br><span class="line"><span class="attr">bandwidth:</span> </span><br><span class="line">  <span class="attr">up:</span> <span class="number">20</span> <span class="string">mbps</span></span><br><span class="line">  <span class="attr">down:</span> <span class="number">100</span> <span class="string">mbps</span></span><br><span class="line"></span><br><span class="line"><span class="attr">socks5:</span></span><br><span class="line">  <span class="attr">listen:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:10808</span> <span class="comment">#对应的代理端口</span></span><br><span class="line"></span><br><span class="line"><span class="attr">http:</span></span><br><span class="line">  <span class="attr">listen:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:10809</span> </span><br><span class="line"><span class="attr">tls:</span></span><br><span class="line">  <span class="attr">insecure:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">sni:</span> <span class="string">xxx.xxx.com</span> <span class="comment">#对应的域名地址</span></span><br><span class="line"></span><br><span class="line"><span class="attr">quic:</span></span><br><span class="line">  <span class="attr">initStreamReceiveWindow:</span> <span class="number">16777216</span></span><br><span class="line">  <span class="attr">maxStreamReceiveWindow:</span> <span class="number">16777216</span></span><br><span class="line">  <span class="attr">initConnReceiveWindow:</span> <span class="number">33554432</span></span><br><span class="line">  <span class="attr">maxConnReceiveWindow:</span> <span class="number">33554432</span></span><br><span class="line"></span><br><span class="line"><span class="attr">fastOpen:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>更新hysteria核心文件：<br>根据你的操作系统下载<a target="_blank" rel="noopener" href="https://github.com/apernet/hysteria/releases">hesteria核心文件</a>,并保存到v2rayN-Home目录\bin\hysteria\</p>
-<img src="/2023/10/17/hysteria-install/core-file.png" class="" title="core file">
-
-
-<p>新增配置：<br>路径：服务器-添加自定义配置服务器</p>
-<img src="/2023/10/17/hysteria-install/v2rayN-hesteria-config.png" class="" title="v2rayN-hesteria-config">
-
-<ul>
-<li><p>ShadowSocket配置<br>需要更新为支持hesteria2协议的版本</p>
-<img src="/2023/10/17/hysteria-install/v2rayN-hesteria-config.png" class="" title="v2rayN-hesteria-config">
-</li>
-<li><p>如需完整的客户端配置文件，请参考：<br><a target="_blank" rel="noopener" href="https://v2.hysteria.network/zh/docs/advanced/Full-Client-Config/">完整客户端配置</a></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2023/05/11/51-yunnan-travel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Michael Zhang">
-      <meta itemprop="description" content="I am always here!!!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶落">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/11/51-yunnan-travel/" class="post-title-link" itemprop="url">2023-五一云南游</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-11 23:07:30" itemprop="dateCreated datePublished" datetime="2023-05-11T23:07:30+08:00">2023-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-10-24 01:58:16" itemprop="dateModified" datetime="2023-10-24T01:58:16+08:00">2023-10-24</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>还记得上一次的五一出行是什么时候，已经是两年前的广西游，那是疫情后的第一个五一，大陆地区的疫情控制较好，所以组织了一波自由行。随着疫情把控力度的层层加码，近两年大多数人都没有出行的欲望。守得云开见月明，阴霾散去，今年的五一自驾游已经早早得排上了日程。我们选了好几个目的地，大西北，张家界，云南等等。最终我们选定了云南，毕竟云南玩的地方很多，昆明，大理，丽江，香格里拉，西双版纳。群里的小伙伴很给力，早早得制定好了旅游路线，其他小伙伴也早早得订好了民宿和车辆。万事俱备，只欠东风。写这篇文章时五一已经过去，但是回忆起当时，就像发生在昨天一样。</p>
-<h2 id="旅游计划："><a href="#旅游计划：" class="headerlink" title="旅游计划："></a>旅游计划：</h2><pre><code>- 时间: 4.26-5.3
-- 地点：云南(昆明，大理，丽江，香格里拉)
-- 形式：自驾游(别克GL8)
-- 人数：5
-</code></pre>
-<img src="/2023/05/11/51-yunnan-travel/travel-route.png" class="" title="旅游总路线">
-<img src="/2023/05/11/51-yunnan-travel/travel-excel-plan.png" class="" title="旅游计划">
-<img src="/2023/05/11/51-yunnan-travel/travel-lijiang.png" class="" title="旅游丽江">
-<img src="/2023/05/11/51-yunnan-travel/travel-erhai.png" class="" title="旅游洱海">
-
-
-<h1 id="出发昆明"><a href="#出发昆明" class="headerlink" title="出发昆明"></a>出发昆明</h1><p>为了这次的游玩，早早得提交了年假申请，4月26日当天，一下班，就匆匆赶往萧山机场，因为航班延误，我们到达昆明的时间预计得到凌晨一点后。</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-flight.jpg" class="" title="航班">
-<p>到达昆明后，我们的第一时间就是去机场取车，取车地点就在机场停车场，非常得方便。现场有两辆GL8供我们选择，大概看了一下，我们选择了形势里程数较小的那辆车。</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-gl8.jpg" class="" title="租车">
-<p>当我们把车开出去的时候，小伙伴发现车辆有些问题，只有踩油门的时候车辆才会前进，搞了半天，原来是脚刹没放(囧)。<br>我们到达昆明后的民宿离机场很近，大概十几分钟车程，等我们办理好入住，已经是凌晨两点多，草草洗漱后就睡下准备迎接五一游的第一天，还有我们还有一个小伙伴要比我们晚到一天，明天的计划是游玩昆明后然后去大理跟最后一个小伙伴集合。</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-pusu.jpg" class="" title="昆明民宿">
-
-<h1 id="五一游-day01"><a href="#五一游-day01" class="headerlink" title="五一游-day01"></a>五一游-day01</h1><p>第一天路线图：</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-day01.png" class="" title="云南day01">
-
-<p>到达昆明的第二天，我们睡到了上午十点才起床，收拾一下后，我们吃了碗云南的米粉，然后便出发前往昆明第一个打卡点-蓝楹花公园，这是个网红打卡点，路的两边开满了蓝楹花，非常适合航拍。</p>
-<img src="/2023/05/11/51-yunnan-travel/travel-lanyinghua01.jpg" class="" title="蓝楹花公园">
-
-<p>仅仅第一个景点，我们逛完就已经到1点左右，由于我们还要赶去大理，昆明到大理需要近4个小时车程。</p>
-<p>我们买了点吃的就驱车前往大理，到达大理后我们首先来到了凤阳邑茶马古道，这里是电视剧《去有风的地方》的取景地，热度红极一时。</p>
-<img src="/2023/05/11/51-yunnan-travel/youfeng01.jpg" class="" title="有风小院">
-
-<p>在大理古城安顿下来后，开始随意逛街，古城的夜晚很美，目前来说游客不是很多。</p>
-<img src="/2023/05/11/51-yunnan-travel/dali01.jpg" class="" title="大理">
-<img src="/2023/05/11/51-yunnan-travel/dali02.jpg" class="" title="大理">
-<p>古城内有很多酒吧、饭馆还有水果摊，有一种颜色非常鲜艳的果子，记得不要吃，含有大量色素。</p>
-<img src="/2023/05/11/51-yunnan-travel/dali03.jpg" class="" title="大理酒吧">
-<p>逛完古城后我们在酒吧听歌喝酒，准备第二天的行程</p>
-<h1 id="五一游-day02"><a href="#五一游-day02" class="headerlink" title="五一游-day02"></a>五一游-day02</h1><img src="/2023/05/11/51-yunnan-travel/day02.png" class="" title="云南day01">
-<p>第二天的最终目的地是丽江古城，我们首先去了崇圣寺三塔，景区门口有票贩子，这个景区内部有三座高塔屹立，进入景区后突降大雨，云南的气候非常多变，时而阳光明媚，时而细雨飘泊。等雨停后我们在此拍照打卡，然后就赶往洱海周边游玩。</p>
-<img src="/2023/05/11/51-yunnan-travel/santa01.jpg" class="" title="崇圣寺三塔">
-<img src="/2023/05/11/51-yunnan-travel/santa02.jpg" class="" title="崇圣寺三塔">
-<p>洱海周边都是旅游景点，建议在此逗留两天时间游玩，因为我们的行程比较赶，所以只能走马观花。<br>S弯-电视剧《去有风的地方》取景点：</p>
-<img src="/2023/05/11/51-yunnan-travel/Swan01.jpg" class="" title="崇圣寺三塔">
-
-<p>洱海周边的桃源码头：</p>
-<img src="/2023/05/11/51-yunnan-travel/erhai01.jpg" class="" title="洱海周边的一个码头">
-
-<h1 id="五一游-day03"><a href="#五一游-day03" class="headerlink" title="五一游-day03"></a>五一游-day03</h1><img src="/2023/05/11/51-yunnan-travel/day03.png" class="" title="云南day01">
-
-
-<h1 id="五一游-day04"><a href="#五一游-day04" class="headerlink" title="五一游-day04"></a>五一游-day04</h1><img src="/2023/05/11/51-yunnan-travel/day04.png" class="" title="云南day01">
-<h1 id="五一游-day05"><a href="#五一游-day05" class="headerlink" title="五一游-day05"></a>五一游-day05</h1><img src="/2023/05/11/51-yunnan-travel/day05.png" class="" title="云南day01">
-<h1 id="五一游-day06"><a href="#五一游-day06" class="headerlink" title="五一游-day06"></a>五一游-day06</h1><img src="/2023/05/11/51-yunnan-travel/day06.png" class="" title="云南day01">
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2022/09/03/book-of-changes-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Michael Zhang">
-      <meta itemprop="description" content="I am always here!!!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶落">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/03/book-of-changes-01/" class="post-title-link" itemprop="url">易经01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-09-03 21:16:16" itemprop="dateCreated datePublished" datetime="2022-09-03T21:16:16+08:00">2022-09-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-09-04 19:26:02" itemprop="dateModified" datetime="2022-09-04T19:26:02+08:00">2022-09-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>近日，看了百家讲坛曾仕强教授讲解的易经</p>
-</blockquote>
-<p>易经，又名周易，曾教授称作它为万经之始</p>
-<p>解开宇宙人生密码的宝典</p>
-<p>人能弘道，非道弘人</p>
-<p>三把钥匙：</p>
-<ul>
-<li>伏羲八卦
-<ul>
-<li>阴阳</li>
-</ul>
-</li>
-<li>文王六十四卦
-<ul>
-<li>六十四卦</li>
-</ul>
-</li>
-<li>十易</li>
-</ul>
-<p>这件事情不过是一而二，二而一二一</p>
-<p>天是阳，地是阴，大地不语，苍天做牛做马</p>
-<p>合一，阴中有阳，阳中有阴</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2022/08/23/talk-about-web3-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Michael Zhang">
-      <meta itemprop="description" content="I am always here!!!">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶落">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/08/23/talk-about-web3-01/" class="post-title-link" itemprop="url">说说web3 01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-08-23 22:16:17" itemprop="dateCreated datePublished" datetime="2022-08-23T22:16:17+08:00">2022-08-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-08-29 00:40:11" itemprop="dateModified" datetime="2022-08-29T00:40:11+08:00">2022-08-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>最近web3的概念的很火,很多人甚至喊出了”All in web3”的口号,对于web3的火爆,我是感觉有点奇怪的,这个概念在我印象中是迟于比特币很久才火的,似乎它就将成为风口,大家都巴不得去喝一口汤.所以我也会查一些资料去了解!</p>
-</blockquote>
-<h1 id="WEB3介绍"><a href="#WEB3介绍" class="headerlink" title="WEB3介绍"></a>WEB3介绍</h1><h2 id="WEB3概念"><a href="#WEB3概念" class="headerlink" title="WEB3概念"></a>WEB3概念</h2><p>我以网上的一篇的文章为例<a target="_blank" rel="noopener" href="https://www.cryptostudio.com/crypto-abc/web3/">Web 3.0: A Simple Explanation</a>.</p>
-<blockquote>
-<p>“Web 3.0”, or short: Web3, is the new talk in town. If you google the term “Web3, “you will find all kinds of stuff: Most of it is very technical and incomprehensible to the average Internet user. Still, you should understand the broader trends and concepts, especially as an investor.</p>
-</blockquote>
-<p>这篇文件提到了Web3.0,简称Web3,同时提到作为投资者更应该了解它的概念。</p>
-<h2 id="WEB3演进"><a href="#WEB3演进" class="headerlink" title="WEB3演进"></a>WEB3演进</h2><p>后面这篇文章介绍了Web1.0,Web2&#x2F;0,Web3.0的历史和演变.</p>
-<p>对于Web1.0和Web2.0的概念介绍,以我个人的知识水平来说,我表示认同,这篇文章的描述如下(当然不仅仅这篇文章,很多其他类似的文章都不约而同得介绍了Web1.0~3.0的发展历程):</p>
-<blockquote>
-<p>The first commercial Web1 applications emerged in the early 1990s. At that time, “the Internet” consisted of static web pages. It was a “read-only” Internet, in that users could only consume information. Platforms like Facebook or Netflix didn’t exist back then; the stars were websites like Britannica Online or Yahoo. IP, HTTP, URI, and HTML provided the technological infrastructure.In 2000, the dot-com bubble burst, and many Internet companies disappeared from the market. Despite this setback, the bright minds of the tech world focused on the further development of innovations such as JavaScript, HTML5, and CSS3. The result was the gradual rise of Web2.While Web1 mainly enabled the transmission of information, Web2 focuses on interaction: Users make their data available to service providers such as social media, e-commerce, or payments providers, enabling these apps to function. In other words: Web2 users are no longer just consumers; they are also the product.</p>
-</blockquote>
-<p>这里简单得介绍了Web1.0和Web2.0,Web1.0时代人们只能被动接受互联网上的内容,在互联网早期确实是这样,以前的门户网站都很火,比如雅虎,搜狐等等.而等到Web2.0时代到来后,这类门户网站热度就一下子减了下来,雅虎甚至都开始卖身.Web2.0的优势就是消费内容的人同时也可以作为创作者,比如Facebook,twitter,微博,小红书,抖音等,而各类新闻及论坛都提供了交互功能,可以评论或者留言,这类原创内容使得互联网更加具有多样性并愈加精彩纷呈.</p>
-<p>Web1.0的优势不言而喻,普通人只能被动接受,便于宣传灌输(手动狗头)。<br>Web2.0则因为具有交互能力,无法把控部分言论,所以需要开启评论或者内容精选,比如微博。</p>
-<img src="/2022/08/23/talk-about-web3-01/web1-to-web2-to-web3.png" class="" title="web的发展">
-
-<p>接下来,这篇文章为了引出Web3.0,讲到了早期Web的局限性,就是中心化架构.中心化架构的缺点是所有数据都被某个私人企业把控,包括所有的金融机构,当然目前所使用的应用几乎都是中心化架构,原文如下:</p>
-<blockquote>
-<p>Web2 is based on a server-client structure, meaning centralized private corporations control and own the data. The result is that these corporations have enormous monopoly power and create barriers to entry for potential competitors. All Web2 applications are controlled by centralized corporations, including the entire banking and financial system.</p>
-</blockquote>
-<img src="/2022/08/23/talk-about-web3-01/web2&web3.png" class="" title="web2和web3的区别">
-<p>然后文章顺道引出了Web3.0,Web3.0为了打破2.0的桎梏,采用的是去中心化架构.原文如下:</p>
-<blockquote>
-<p>The Web3 has set out to break up the market power of these centralized players by replacing the centralized server-client infrastructure with distributed ledgers, the most common type being the blockchain. So instead of all data being stored on a centralized server, it will be scattered across a decentralized computer network. Centralized entities, which previously acted as intermediaries, will thus become obsolete.</p>
-</blockquote>
-<h2 id="Web3与比特币"><a href="#Web3与比特币" class="headerlink" title="Web3与比特币"></a>Web3与比特币</h2><p>原文似乎将Web3.0和区块链(blockchain)等同起来,这两真的是同一个东西吗?</p>
-<img src="/2022/08/23/talk-about-web3-01/web3&blockchain.png" class="" title="币安创始人的推特">
-
-<p>对于去中心化架构,我第一次了解到这个概念还是从比特币这里.<a target="_blank" rel="noopener" href="http://satoshinakamoto.me/zh-tw/bitcoin.pdf">比特币的白皮书</a>中介绍了这种不需要通过任何金融机构的电子支付系统:”本文提出了一種完全通過點對點技術實現的電子現金系統，它使得線上支付能夠直接由一方發起並支付給另外一方，中間不需要通過任何的金融機構。”所以,第一个采用该架构的应用是比特币,基于目前的金融现状提出了解决方案.以下是关于<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bitcoin">比特币的介绍</a>:</p>
-<blockquote>
-<p>Bitcoin (₿) is a decentralized digital currency that can be transferred on the peer-to-peer bitcoin network.[7] Bitcoin transactions are verified by network nodes through cryptography and recorded in a public distributed ledger called a blockchain. The cryptocurrency was invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.[10] The currency began use in 2009,[11] when its implementation was released as open-source software.</p>
-</blockquote>
-<p>比特币是2008年的时候发明的，同时在2009年开始正式使用。</p>
-<img src="/2022/08/23/talk-about-web3-01/bitcoin.png" class="" title="比特币">
-
-<p>那么,web3.0的概念是什么时候提出的呢?看下Wiki上的介绍：</p>
-<blockquote>
-<p>Web3 (also known as Web 3.0[1][2][3]) is an idea for a new iteration of the World Wide Web which incorporates concepts such as decentralization, blockchain technologies, and token-based economics.[4] Some technologists and journalists have contrasted it with Web 2.0, wherein they say data and content are centralized in a small group of companies sometimes referred to as “Big Tech”.[5] The term “Web3” was coined in 2014 by Ethereum co-founder Gavin Wood, and the idea gained interest in 2021 from cryptocurrency enthusiasts, large technology companies, and venture capital firms.[5][6]</p>
-</blockquote>
-<p>“Web3”一词由以太坊联合创始人 Gavin Wood 于 2014 年创造，该想法在 2021 年引起了加密货币爱好者、大型科技公司和风险投资公司的兴趣。</p>
-<h2 id="WEB3的案例"><a href="#WEB3的案例" class="headerlink" title="WEB3的案例"></a>WEB3的案例</h2><p>所以Web3是后于比特币产生的概念，至于去中心化，也是比特币的概念中首创，也可能更早。货币使用去中心化架构很好理解，现在的政府可以无限印钱，导致通货膨胀，但是比特币的概念中货币总量是一定的，同时加入比特币区块链的节点因为去中心化架构可以获取完整的账本。至于其他场景是否适用于去中心化架构，目前还没有实际了解到。不过这篇文章中有一个案例确实挺适合Web3.0,那就是民主，原文如下：</p>
-<blockquote>
-<p>Even democratic processes could be token-based in Web3. Instead of representative democracy, where elected representatives make centralized decisions, direct democracy could experience a renaissance in Web3. Elected representatives are ultimately also intermediaries that a token-based governance organism could replace.</p>
-</blockquote>
-<p>众所周知，现任美国总统拜登之前陷入选举舞弊的丑闻，不管是否真实，类似邮寄选票或者网络计票的方式都为舞弊提供了可能，似乎Web3.0是个完美的解决方案。</p>
-<p>同时这篇文章还提出了所以的用例最终会在所谓的“元宇宙”中聚集在一起，元宇宙这个概念最近火了一段时间，A股相关的元宇宙概念股涨了一波。原为如下：</p>
-<blockquote>
-<p>All these use cases could eventually come together in the so-called metaverse: The metaverse is a virtual reality where people communicate, trade, play, learn, or otherwise interact with each other. Unlike in Web2, where the user is the product, in Web3, the user is also the owner.</p>
-</blockquote>
-<p>说实话，我没看懂它要描述什么，我也觉得元宇宙是未来，因为现在的互联网确实没什么好画大饼了，只能往元宇宙发展，不过目前的基础设施还没有成型，只能等真正落地了，我们才能发现我真的需要他。</p>
-<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>学习Web3.0，除了需要了解比特币，更重要还是要去了解以太坊、以太坊、虚拟现实等等，每当了解一个新的概念，后面总有千千万万的概念等着你去探索，学无止境，就是说这样吧！</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://www.cryptostudio.com/crypto-abc/web3/">Web 3.0: A Simple Explanation</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Web3">Web3介绍</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bitcoin">比特币的介绍</a><br><a target="_blank" rel="noopener" href="http://satoshinakamoto.me/zh-tw/bitcoin.pdf">比特币的白皮书</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/10/21/iOS-distribution-introduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -941,7 +512,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/04/04/js-learning01/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/03/16/kubecm-introduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -955,7 +526,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/04/js-learning01/" class="post-title-link" itemprop="url">js-learning01</a>
+            <a href="/2021/03/16/kubecm-introduce/" class="post-title-link" itemprop="url">使用kubecm管理多个Kubernetes集群</a>
         </h2>
 
         <div class="post-meta">
@@ -965,7 +536,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-04-04 17:27:50" itemprop="dateCreated datePublished" datetime="2021-04-04T17:27:50+08:00">2021-04-04</time>
+              <time title="Created: 2021-03-16 19:23:07" itemprop="dateCreated datePublished" datetime="2021-03-16T19:23:07+08:00">2021-03-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -986,7 +557,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <blockquote>
+<p>最近遇到需要切换多个Kubernetes集群的场景，发现了kubecm这个工具，可以轻松管理你的Kubeconfig文件，github地址：<a target="_blank" rel="noopener" href="https://github.com/sunny0826/kubecm">https://github.com/sunny0826/kubecm</a></p>
+</blockquote>
+<h2 id="Kubecm安装"><a href="#Kubecm安装" class="headerlink" title="Kubecm安装"></a>Kubecm安装</h2><ul>
+<li><p>Macos安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install kubecm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>二进制下载安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># linux x86_64</span></span><br><span class="line">curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v<span class="variable">$&#123;VERSION&#125;</span>/kubecm_<span class="variable">$&#123;VERSION&#125;</span>_Linux_x86_64.tar.gz</span><br><span class="line"><span class="comment"># macos</span></span><br><span class="line">curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v<span class="variable">$&#123;VERSION&#125;</span>/kubecm_<span class="variable">$&#123;VERSION&#125;</span>_Darwin_x86_64.tar.gz</span><br><span class="line"><span class="comment"># windows</span></span><br><span class="line">curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v<span class="variable">$&#123;VERSION&#125;</span>/kubecm_<span class="variable">$&#123;VERSION&#125;</span>_Windows_x86_64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># linux &amp; macos</span></span><br><span class="line">tar -zxvf kubecm.tar.gz kubecm</span><br><span class="line"><span class="built_in">cd</span> kubecm</span><br><span class="line">sudo <span class="built_in">mv</span> kubecm /usr/local/bin/</span><br><span class="line"></span><br><span class="line"><span class="comment"># windows</span></span><br><span class="line"><span class="comment"># Unzip kubecm.tar.gz</span></span><br><span class="line"><span class="comment"># Add the binary in to your $PATH</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Kubecm-使用"><a href="#Kubecm-使用" class="headerlink" title="Kubecm 使用"></a>Kubecm 使用</h2><ul>
+<li><p>Kubecm用法</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Usage:</span><br><span class="line">  kubecm [flags]</span><br><span class="line">  kubecm [command]</span><br><span class="line"></span><br><span class="line">Available Commands:</span><br><span class="line">    add         Merge configuration file with $HOME/.kube/config</span><br><span class="line">    alias       Generate alias for all contexts</span><br><span class="line">    clear       Clear lapsed context, cluster and user</span><br><span class="line">    completion  Generates bash/zsh completion scripts</span><br><span class="line">    create      Create new KubeConfig(experiment)</span><br><span class="line">    delete      Delete the specified context from the kubeconfig</span><br><span class="line">    help        Help about any command</span><br><span class="line">    list        List kubeconfig</span><br><span class="line">    merge       Merge the kubeconfig files in the specified directory</span><br><span class="line">    namespace   Switch or change namespace interactively</span><br><span class="line">    rename      Rename the contexts of kubeconfig</span><br><span class="line">    switch      Switch Kube Context interactively</span><br><span class="line">    version     Print version info</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flags:</span><br><span class="line">      --config string   path of kubeconfig (default &quot;$HOME/.kube/config&quot;)</span><br><span class="line">  -h, --help   help for kubecm</span><br><span class="line"></span><br><span class="line">Use &quot;kubecm [command] --help&quot; for more information about a command.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加集群连接信息<br>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubecm add -f test.yaml  <span class="comment">## test.yaml为Kubernets集群的连接信息</span></span><br></pre></td></tr></table></figure>
+<p>输入上述命令后会提示是否覆盖$HOME&#x2F;.kube&#x2F;config文件，如果选择flase，则会在本地生成.&#x2F;config.yaml</p>
+</li>
+<li><p>罗列所有集群信息</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubecm list</span><br></pre></td></tr></table></figure>
+<img src="/2021/03/16/kubecm-introduce/1.png" class="" title="kubecm-list">
+
+<ul>
+<li><p>切换集群</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubecm switch</span><br></pre></td></tr></table></figure>
+<p>根据箭头切换集群信息</p>
+</li>
+<li><p>删除集群</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubecm delete</span><br></pre></td></tr></table></figure>
+<p>根据箭头删除对应的集群</p>
+</li>
+</ul>
+
       
     </div>
 
@@ -1005,7 +610,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/03/26/vpc-design01/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/02/24/mz-2020-summary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1019,7 +624,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/26/vpc-design01/" class="post-title-link" itemprop="url">vpc-design01</a>
+            <a href="/2021/02/24/mz-2020-summary/" class="post-title-link" itemprop="url">我的2020</a>
         </h2>
 
         <div class="post-meta">
@@ -1029,7 +634,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-03-26 13:39:37" itemprop="dateCreated datePublished" datetime="2021-03-26T13:39:37+08:00">2021-03-26</time>
+              <time title="Created: 2021-02-24 18:01:08" itemprop="dateCreated datePublished" datetime="2021-02-24T18:01:08+08:00">2021-02-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1050,35 +655,169 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ul>
-<li><p>传统数据中心网络的弊端</p>
-</li>
-<li><p>overlay网络</p>
-</li>
-<li><p>vpc</p>
-</li>
-<li><p>vpc相关功能</p>
-</li>
-<li><p>vpc设计</p>
-</li>
-<li><p>sdn控制器：pox Floodlight ect</p>
+          <blockquote>
+<p>2021已经过去了3个月有余，一直想对2020年做一个总结，拖着拖着就拖到了今天。</p>
+</blockquote>
+<p>回想2020年，可以用“新的开始”来形容，来到了一个全新的平台，更大的舞蹈，也是更大的挑战。</p>
+<img src="/2021/02/24/mz-2020-summary/1.jpg" class="" title="challenge">
+
+<p>时间退回到2019年的年中，那个时候做了一个此生难忘的决定，从事培训行业，于是乎，来到了一家从事ICT培训的公司，平台貌似也挺大。那时候整个集团都在“all in cloud”的号召下，传统CT行业似乎渐渐走到了尽头（除了5G）。在云计算的席卷下，各种关于公有云的产品和理念扑面而来，而我们正是云培训部门，而我从事了多年的云平台的管理经验，正好碰上了这个浪潮。说到云的理念，我只是了然于胸，只是知道云就是这样一回事，对于云计算的理论，我是云里雾里的。而通过这次的培训经历，我接触和学习了各种云计算的理论和课程，渐渐得理论结合曾经的实操，对于云计算的本质似乎更加透彻!</p>
+<img src="/2021/02/24/mz-2020-summary/2.png" class="" title="all-in-cloud">
+
+<p>从事了一年的培训之后，发现渐渐怀念曾今的工作状态，纸上得来总觉浅，于是乎，我渐渐暗下决心回到过去。当时正是疫情状态，虽然远程办公远程培训更多得出现在我们的工作中，但是明显感觉比以前更忙了。</p>
+<p>在经过多轮的面试之后，我最终还是换了工作，来到了一个更大的圈子，从事于更偏应用层方面的交付，虽然我个人的意愿比较倾向于云计算方面的工作，但是对于已经了解过底层运维和云运维的我来说，再了解一下应用方面的交付运维也算是大满贯了!</p>
+<p>新的公司氛围很好，工作时间非常弹性，适应得也很快，工作内容更倾向于业务方向，技术方面的内容不需要参与太多。</p>
+<p>因为之前有培训相关的经验，针对我们产品的课程认证工作也自然落在了我头上，有一种似曾相识的感觉。</p>
+
+
+<p>说完工作，再谈一下感情生活，来到新公司后因为偶然的一次机会，发生了一段美好而短暂的感情，没有最终成功，却让我心神俱碎。回想过去的感情，还是要克制自己的倔强。</p>
+<img src="/2021/02/24/mz-2020-summary/4.png" class="" title="cat">
+
+<p>至于生活方面，来到新公司后重新找到了篮球组织，可以每周一次运动，强身健体。也认识了很多新的伙伴，这真的很美好…</p>
+<p>新的一年又来了，在处理好工作的同时，我又得完善一下自己的知识图谱了，学无止境，吾将上下而求索！</p>
+<img src="/2021/02/24/mz-2020-summary/5.png" class="" title="mapping-knowledge-domain">
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/02/06/helm-introduce01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Michael Zhang">
+      <meta itemprop="description" content="I am always here!!!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶落">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/06/helm-introduce01/" class="post-title-link" itemprop="url">Helm介绍01-初识Helm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-06 19:59:51" itemprop="dateCreated datePublished" datetime="2021-02-06T19:59:51+08:00">2021-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-08-23 00:20:34" itemprop="dateModified" datetime="2022-08-23T00:20:34+08:00">2022-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Helm介绍"><a href="#Helm介绍" class="headerlink" title="Helm介绍"></a>Helm介绍</h2><h3 id="Helm概念"><a href="#Helm概念" class="headerlink" title="Helm概念"></a>Helm概念</h3><blockquote>
+<p>Helm 是 Deis 开发的一个用于 Kubernetes 应用的包管理工具，主要用来管理 Charts。有点类似于 Ubuntu 中的 APT 或 CentOS 中的 YUM。Helm Chart 是用来封装 Kubernetes 原生应用程序的一系列 YAML 文件。可以在你部署应用的时候自定义应用程序的一些 Metadata，以便于应用程序的分发。对于应用发布者而言，可以通过 Helm 打包应用、管理应用依赖关系、管理应用版本并发布应用到软件仓库。对于使用者而言，使用 Helm 后不用需要编写复杂的应用部署文件，可以以简单的方式在 Kubernetes 上查找、安装、升级、回滚、卸载应用程序。</p>
+</blockquote>
+<h3 id="Helm架构"><a href="#Helm架构" class="headerlink" title="Helm架构"></a>Helm架构</h3>
+
+<p>Helm由两部分组成：<strong>Helm Client</strong> 和 <strong>Tiller Server</strong>，Client负责管理 chart，而Server端负责管理 release。</p>
+<ul>
+<li><p>Helm Client 是最终用户的命令行客户端。客户端负责以下部分：</p>
+<ul>
+<li>本地 chart 开发</li>
+<li>管理存储库</li>
+<li>与 Tiller 服务交互</li>
+<li>发送要安装的 chart</li>
+<li>查询有关发布的信息</li>
+<li>请求升级或卸载现有 release</li>
+</ul>
 </li>
 </ul>
 <blockquote>
-<p>目前各大云服务商都提供了VPC（Virtual Private Cloud）产品，VPC已经成为用户使用云首先需要考虑的云产品，甚至是比云主机更早需要考虑的云产品，可以说是基础中的基础。</p>
+<p>Chart：一个 Helm 包，其中包含了运行一个应用所需要的工具、资源定义等，还可能包含 Kubernetes 集群中的服务定义，类似 APT 的 dpkg 或者 Yum 的 RPM 文件，</p>
 </blockquote>
-<p>基础术语介绍：</p>
-<h1 id="VPC基础"><a href="#VPC基础" class="headerlink" title="VPC基础"></a>VPC基础</h1><h2 id="VPC概念"><a href="#VPC概念" class="headerlink" title="VPC概念"></a>VPC概念</h2><p>VPC是一个让您能够在自己定义的逻辑隔离的虚拟网络中启动云资源的服务。您可以完全掌控您的虚拟联网环境，包括选择自己的 IP 地址范围、创建子网以及配置路由表和网络网关。</p>
-<p>VPC可以认为是一个网络容器。用户可以免费开通这个容器，开通后再在这个容器中“放置”用户需要的云产品，比如云主机，负载均衡，云数据库等。VPC的基本组件包含路由器和交换机，下图是AWS一个VPC。</p>
-<img src="/2021/03/26/vpc-design01/aws-vpc.png" class="aliunvpc">
-
-<h2 id="经典网络"><a href="#经典网络" class="headerlink" title="经典网络"></a>经典网络</h2><p>经典网络：公有云上所有用户共享公共网络资源池，用户之间未做逻辑隔离。用户的内网IP由系统统一分配，相同的内网IP无法分配给不同用户。</p>
-<p>各个公有云厂商早期都是在经典网络中分配云资源，各个租户可能是在同一个VLAN中启动各自的资源，隔离性差，而且存在严重的安全隐患。<br>下图是经典网络和VPC的对比：</p>
-<img src="/2021/03/26/vpc-design01/classic-network.png" class="aliunvpc">
-<p>对比可以看到，VPC优势明显，通过VPC，用户可以自由定义网段划分、IP地址和路由策略；安全方面，VPC可提供网络ACL及安全组的访问控制，VPC灵活性和安全性更高。可适用于对安全隔离性要求较高的业务、托管多层web应用、弹性混合云部署等使用场景中，符合金融、政企等行业的强监管、数据安全要求。</p>
+<ul>
+<li><p>Tiller Server 是一个集群内服务，与 Helm 客户端进行交互，并与 Kubernetes API 服务进行交互。服务负责以下内容：</p>
+<ul>
+<li>监听来自 Helm 客户端的传入请求</li>
+<li>结合 chart 和配置来构建发布</li>
+<li>将 chart 安装到 Kubernetes 中，然后跟踪后续 release</li>
+<li>通过与 Kubernetes 交互来升级和卸载 chart</li>
+</ul>
+</li>
+</ul>
 <blockquote>
-<p>既然VPC有这么多优势，那为什么</p>
+<p>Release: 在 Kubernetes 集群上运行的 Chart 的一个实例。在同一个集群上，一个 Chart 可以安装很多次。每次安装都会创建一个新的 release。</p>
 </blockquote>
+<p><em>Helm 整个系统的主要任务就是，在仓库中查找需要的 Chart，然后把 Chart 以 Release 的形式安装到 Kubernetes 之中</em></p>
+<p>Helm 客户端使用 Go 编程语言编写，并使用 gRPC 协议套件与 Tiller 服务进行交互。</p>
+<p>Tiller 服务也用 Go 编写。它提供了一个与客户端连接的 gRPC 服务，它使用 Kubernetes 客户端库与 Kubernetes 进行通信。目前，该库使用 REST + JSON。</p>
+<p>Tiller 服务将信息存储在位于 Kubernetes 内的 ConfigMaps 中。它不需要自己的数据库。</p>
+<h2 id="Helm安装"><a href="#Helm安装" class="headerlink" title="Helm安装"></a>Helm安装</h2><h3 id="二进制版本安装"><a href="#二进制版本安装" class="headerlink" title="二进制版本安装"></a>二进制版本安装</h3><ul>
+<li>下载对应<a target="_blank" rel="noopener" href="https://github.com/helm/helm/releases">需要的版本</a></li>
+<li>解压对应的tar包</li>
+<li>在解压目中找到helm程序，移动到需要的目录中</li>
+</ul>
+<h3 id="脚本安装"><a href="#脚本安装" class="headerlink" title="脚本安装"></a>脚本安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3</span><br><span class="line"><span class="built_in">chmod</span> 700 get_helm.sh</span><br><span class="line">./get_helm.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过包管理器安装"><a href="#通过包管理器安装" class="headerlink" title="通过包管理器安装"></a>通过包管理器安装</h3><ul>
+<li>macos安装</li>
+</ul>
+<p>brew install helm</p>
+<ul>
+<li>Debian&#x2F;Ubuntu</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -</span><br><span class="line">sudo apt-get install apt-transport-https --yes</span><br><span class="line">echo &quot;deb https://baltocdn.com/helm/stable/debian/ all main&quot; | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install helm</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://helm.sh/zh/docs/intro/install/">其他安装方式</a></li>
+</ul>
+<h2 id="Helm使用"><a href="#Helm使用" class="headerlink" title="Helm使用"></a>Helm使用</h2><p>使用Helm的先决条件：</p>
+<ul>
+<li>使用Helm，需要一个Kubernetes集群(最简单的是自己装一个minikube，或者自己通过虚拟机搭建一个单节点的kubernetes,可以使用<a target="_blank" rel="noopener" href="https://github.com/caoyingjunz/kubez-ansible">kubez-ansible</a>快速搭建)，也应该有一个本地的 kubectl</li>
+<li>安装和配置Helm</li>
+</ul>
+<h3 id="Helm初始化"><a href="#Helm初始化" class="headerlink" title="Helm初始化"></a>Helm初始化</h3><p>安装Helm后，可以添加一个chart仓库,一个常见的选择是添加Helm的官方仓库:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add stable https://charts.helm.sh/stable</span><br></pre></td></tr></table></figure>
+
+<p>可以看到可以被您安装的charts列表：</p>
+<img src="/2021/02/06/helm-introduce01/2.png" class="" title="查看安装的chart">
+
+<h3 id="使用Helm安装一个release"><a href="#使用Helm安装一个release" class="headerlink" title="使用Helm安装一个release"></a>使用Helm安装一个release</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 在chart仓库中搜索mysql</span></span><br><span class="line">helm search repo mysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用helm安装mysql</span></span><br><span class="line">helm install stable/mysql --generate-name</span><br></pre></td></tr></table></figure>
+
+<img src="/2021/02/06/helm-introduce01/3.png" class="" title="使用helm安装mysql">
+
+<p>通过helm ls可以查看已经创建的release</p>
+<img src="/2021/02/06/helm-introduce01/5.png" class="" title="使用helm安装mysql">
+
+<blockquote>
+<p>所以，通过Helm就可以快速部署一个自己所需要的组件应用，节省大部分时间。可以为自己的应用编写chart，并快速发布。</p>
+</blockquote>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://helm.sh/zh/docs/intro/quickstart/">快速入门指南</a><br><a target="_blank" rel="noopener" href="https://helm.sh/zh/docs/intro/using_helm/">使用Helm</a><br><a target="_blank" rel="noopener" href="https://whmzsu.github.io/helm-doc-zh-cn/architecture-zh_cn.html">Kubernetes Helm 架构</a></p>
 
       
     </div>
@@ -1098,7 +837,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/03/16/talk-about-mining/">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/01/31/knowledge-manage03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1112,7 +851,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/16/talk-about-mining/" class="post-title-link" itemprop="url">说说挖矿</a>
+            <a href="/2021/01/31/knowledge-manage03/" class="post-title-link" itemprop="url">知识管理03</a>
         </h2>
 
         <div class="post-meta">
@@ -1122,7 +861,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-03-16 20:18:03" itemprop="dateCreated datePublished" datetime="2021-03-16T20:18:03+08:00">2021-03-16</time>
+              <time title="Created: 2021-01-31 23:46:37" itemprop="dateCreated datePublished" datetime="2021-01-31T23:46:37+08:00">2021-01-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1143,7 +882,338 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <blockquote>
+<p>前两篇文章已经给大家介绍了知识管理的重要性及如何构建知识管理体系。Today，将会给大家讲解一下如何挑选知识管理平台，这一篇也是知识管理的终章。</p>
+</blockquote>
+<h2 id="团队知识管理平台的要求"><a href="#团队知识管理平台的要求" class="headerlink" title="团队知识管理平台的要求"></a>团队知识管理平台的要求</h2><p>团队知识管理的平台选择，主要考虑以下因素：</p>
+<ul>
+<li>稳定，知识安全不丢失。</li>
+<li>存储空间大，且内容不泄密。</li>
+<li>个人文档和团队文档加以区分。</li>
+<li>多级目录，多种成员权限，多种文档权限。</li>
+<li>利于查看使用，分享便捷。</li>
+<li>最好还提供多人共同编辑，而且编辑完能够直接保存到平台。</li>
+<li>带一些沟通功能，如评论等。</li>
+</ul>
+<blockquote>
+<p>除了团队知识管理平台，个人知识管理平台可以根据个人喜好选择，比如网易云笔记、OneNote，印象笔记等</p>
+</blockquote>
+<h2 id="知识管理平台的选择"><a href="#知识管理平台的选择" class="headerlink" title="知识管理平台的选择"></a>知识管理平台的选择</h2><blockquote>
+<p>目前有很多主流的知识管理平台，都可以满足团队知识管理体系的构建，企业内部一般根据也会搭建自己的知识管理平台，比如使用svn或者git进行版本管理，或者使用jira + confluence进行缺陷跟踪和信息共享，或者使用企业版的软件进行知识管理，或者大型公司有开发自己的知识管理平台</p>
+</blockquote>
+<p>以下是一些主流知识管理平台：</p>
+<h3 id="Google-Docs"><a href="#Google-Docs" class="headerlink" title="Google Docs"></a>Google Docs</h3><img src="/2021/01/31/knowledge-manage03/1.jpg" class="" title="google-docs">
+
+<p>Google Docs是Google推出的文字处理器。用户可在网络应用程序、Android、IOS、Microsoft Windows、黑莓手机的流动应用程序以及Chrome OS的应用程序上使用Google Docs。Google Docs同时兼容Microsoft Office的文件格式[1]。Google Docs允许用户在线创建和编辑文件，同时与其他用户进行实时协作。 – From wiki</p>
+<h3 id="Office365"><a href="#Office365" class="headerlink" title="Office365"></a>Office365</h3>
+
+<p>Microsoft 365是微软建基于Microsoft Office办公室套件的云端办公室方案，包括免费的线上Office Online、线上会议Skype for Business、管理信件的Outlook Web App、建立小组沟通网站的SharePoint Online等  – From wiki</p>
+<h3 id="WPS-office"><a href="#WPS-office" class="headerlink" title="WPS office"></a>WPS office</h3><img src="/2021/01/31/knowledge-manage03/3.png" class="" title="wps office">
+
+<p>WPS Office是由金山软件股份有限公司发布的一款办公软件，用于办公软件最常用的文字编辑、表格、演示稿等功能。覆盖Windows、MacOS、Linux、Android、iOS等平台。</p>
+<blockquote>
+<p>WPS Office也是我个人知识管理的工具，除去企业级的功能，WPS跟google docs和office365一样提供了云端同步功能，同时提供了很多PPT模板和图形样式，基本可以满足个人办公需要</p>
+</blockquote>
+<h3 id="印象笔记"><a href="#印象笔记" class="headerlink" title="印象笔记"></a>印象笔记</h3><img src="/2021/01/31/knowledge-manage03/4.jpg" class="" title="印象笔记">
+
+<p>印象笔记是帮助个人及团队创建、收集、整理和分享信息的知识管理工具，由Evernote于2012年5月正式推出。2018年6月印象笔记重组落地为中美合资的独立实体。 – From wiki</p>
+<h3 id="石墨文档"><a href="#石墨文档" class="headerlink" title="石墨文档"></a>石墨文档</h3><img src="/2021/01/31/knowledge-manage03/5.jpg" class="" title="石墨文档">
+
+<p>石墨文档是中国第一款支持云端实时协作的企业办公服务软件（功能类比于Google Docs、Quip），可以实现多人同时在同一文档及表格上进行编辑和实时讨论，同步响应速度达到毫秒级，是团队协作的最佳选择。在赋予产品高协作性功能的基础上，石墨文档还是一款具有中国式美感的科技产品，2015年获得极客公园评选的最佳互联网创新产品50强。在SAAS类协作云文档国内市场占有规模排名第一，并且是中国各大SAAS产品中云文档服务的首选合作伙伴。2016年8月，石墨文档启动To B 战略上线企业版，提供诸如权限分级、数据保护等加强功能，目前注册企业超过两万家；同时与钉钉达成深度战略合作，成为钉钉首批推荐应用中的唯一的新品，也是唯一的云文档类应用。目前总用户数超过200万，合作伙伴十多家。 – From 百度百科</p>
+<h3 id="语雀"><a href="#语雀" class="headerlink" title="语雀"></a>语雀</h3><img src="/2021/01/31/knowledge-manage03/6.png" class="" title="语雀文档">
+
+<p>「语雀」是一个「专业的云端知识库」，孵化自 蚂蚁集团 ，是 体验科技 理念下的一款创新产品，已是 10 万阿里员工进行文档编写、知识沉淀的标配。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>搭建团队知识管理体系是一个复杂又漫长的过程，然而戴尔、惠普、毕马威等众多国外的知名企业却一直在坚持做这件事，就是因为他们体会到了团队知识管理所带来的巨大价值，因此为之付出一定的精力和成本也是值得的。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/column/p/25002844">理论篇|如何搭建团队知识管理体系？</a><br><a target="_blank" rel="noopener" href="https://www.shangyexinzhi.com/article/349034.html">文件夹体系的搭建——知识管理系列文章之二</a><br><a target="_blank" rel="noopener" href="https://www.shangyexinzhi.com/article/346643.html">标签系统的搭建——知识管理系列文章之四</a><br><a target="_blank" rel="noopener" href="https://www.shangyexinzhi.com/article/348871.html">搜索系统的使用——知识管理系列文章之五</a><br><a target="_blank" rel="noopener" href="https://wiki.mbalib.com/wiki/%E5%BD%BC%E5%BE%97%C2%B7%E5%BE%B7%E9%B2%81%E5%85%8B">彼得·德鲁克</a><br><a target="_blank" rel="noopener" href="https://wiki.mbalib.com/wiki/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F">知识管理系统</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/01/22/kubez-ansible-suggest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Michael Zhang">
+      <meta itemprop="description" content="I am always here!!!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶落">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
+            <a href="/2021/01/22/kubez-ansible-suggest/" class="post-title-link" itemprop="url">推荐一个一键安装Kubernetes集群的工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-22 00:40:45" itemprop="dateCreated datePublished" datetime="2021-01-22T00:40:45+08:00">2021-01-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-08-23 00:20:35" itemprop="dateModified" datetime="2022-08-23T00:20:35+08:00">2022-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>推荐一个工具，可以用于一键安装Kubernetes及相关生态的工具，可以参考项目<a target="_blank" rel="noopener" href="https://github.com/caoyingjunz/kubez-ansible">源码地址</a>。</p>
+<p>如果要在单机安装Kubernetes集群，可以直接运行all-in-one脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/yingjuncao/kubez-ansible/master/tools/all_in_one.sh | bash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>亲测单机安装有效</p>
+<img src="/2021/01/22/kubez-ansible-suggest/1.png" class="" title="P1">
+
+<p>多节点安装可以支持，可以参考<a target="_blank" rel="noopener" href="https://github.com/caoyingjunz/kubez-ansible/blob/master/doc/source/install/multinode.md">kubez-ansibel安装多节点 的使用方法</a>。</p>
+<p>后续将会更新新的工具！！请持续关注～～</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2021/01/18/talk-about-996-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Michael Zhang">
+      <meta itemprop="description" content="I am always here!!!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶落">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/talk-about-996-md/" class="post-title-link" itemprop="url">说说996和35岁危机</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-18 17:00:00" itemprop="dateCreated datePublished" datetime="2021-01-18T17:00:00+08:00">2021-01-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-08-23 00:20:35" itemprop="dateModified" datetime="2022-08-23T00:20:35+08:00">2022-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>近日某公司员工猝死事件甚嚣尘上，热度持续发酵，好多内部的勇士揭竿而起，被约谈、被劝退，好不热闹。一直想写写关于996和35岁危机的内容，今天就来谈谈。</p>
+</blockquote>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/996%E5%B7%A5%E4%BD%9C%E5%88%B6/19940031?fromtitle=996&fromid=19958311">996</a>的定义：</p>
+<blockquote>
+<p>996工作制是一种违反《中华人民共和国劳动法》的延长法定工作时间的工作制度，指的是早上9点上班、晚上9点下班，中午和傍晚休息1小时（或不到），总计工作10小时以上，并且一周工作6天的工作制度，代表着中国互联网企业盛行的加班文化。</p>
+</blockquote>
+<p>个人认为996是一种资源严重浪费的代表，很多事情即使没有996也可以做得很好，但是项目上总是存在很多坑，需要打工人用时间区填补。这往往就是因为前期方案没有设计好，或者双方的理解有误，导致需要时间去补救。当然还有可能就是公司内部的流程效率低下，或者跨部门沟通费时费力导致的。或许你想象不到在信息化如此普及的年代下还有很多公司必须要手动签字才能让流程运行下去，又或者公司会让员工做很多无谓的工作，导致需要花费额外的时间。至于，跨部门沟通，这是个世纪难题- -。</p>
+<p>在996无法避免的情况下，如何应对这种制度呢。第一种就是只能忍受，但是不是毫无反抗的忍受，在996的过程中不可能每时每刻保持工作，人的注意力是有限的。在工作的过程中，可以花时间总结工作中的遇到的困难，积累成自己的经验，这样提高效率之后就可以有更多的时间去学习。同时，你从工作中获得的经验也是人生的一笔宝贵财富。</p>
+<p>还有一种就是找一家955或者965的公司，或者考公务员，据2020年报考的大学专业统计，师范类等相关容易在自己城市找工作或者容易考公务员的专业比较火爆。一线城市虽然有更多的工作机会和社会资源，但是没有背景的人始终难免被吸血，而且还要忍受拥堵的交通，尤其是当大家愈发看清资本家嘴脸之后，更多的人会清醒，回家找份清闲的工作未尝不可。除了体制内的工作外，还有有很多955或者965的工作，可以参考这个<a target="_blank" rel="noopener" href="https://github.com/formulahendry/955.WLB">链接</a>。</p>
+<hr>
+<p>除了996之外，还有一个话题就是35岁危机，以下是35岁危机的定义：</p>
+<blockquote>
+<p>“35岁危机”是人才市场上存在的一种现象，即许多用人单位在招聘员工时，都明文规定只要35岁以下者。这种“35岁危机”不仅对求职者的影响较大，对那些企业在职员工也造成了不小的冲击。许多企业员工在过了35岁以后，都不免有些担心：公司裁员，一旦中年失业，生活就危险了。</p>
+</blockquote>
+<p>目前很多公司都明确规定并不招收35以上的新员工，这是一个非常残酷的现实，意味着如果你35岁之前没有成为高管或者没有财富自由，那么接下来的道路会如履薄冰，因为一旦失业，你的人生道路就会打上一个问号。不过也有程序员在35岁的失业年龄在家<a target="_blank" rel="noopener" href="https://m.toutiaoimg.cn/group/6911932694599303687/?app=news_article&timestamp=1611164352&group_id=6911932694599303687">全职撸代码</a>，但是这种方式并不一定适合所有人，也有IT人在经历了工作的洗礼之后选择<a target="_blank" rel="noopener" href="https://www.toutiao.com/i6912037372054028804/">采菊东篱下</a>。</p>
+<p>在我看来，35岁危机是一口警钟，他时刻提醒着我们要有危机意识，生于忧患，我们在平常的工作及生活中必须要跳出原有的圈子，积极参加社交活动并keep learning。找到转型的道路或者发展自身的优势达到不可替代的作用。还有就是在年轻的时候有一定的储蓄并学习理财知识，这相当于是给自己的退路，生死时刻可以帮助我们渡过难关。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://blog.zhangyefeng.life/2020/12/27/knowledge-manage02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Michael Zhang">
+      <meta itemprop="description" content="I am always here!!!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶落">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/27/knowledge-manage02/" class="post-title-link" itemprop="url">知识管理02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-27 23:54:17" itemprop="dateCreated datePublished" datetime="2020-12-27T23:54:17+08:00">2020-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-08-23 00:20:35" itemprop="dateModified" datetime="2022-08-23T00:20:35+08:00">2022-08-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>上一篇<a target="_blank" rel="noopener" href="https://www.zhangyefeng.cn/2020/11/29/knowledge-manage/">文章</a>我们已经给大家介绍了知识管理的重要性。这篇文章将会给讲解一下如何构建知识管理体系。</p>
+<p>构建知识管理体系主要分为三步：<strong>普及、规划、管理与完善</strong></p>
+<h2 id="构建知识管理体系-普及"><a href="#构建知识管理体系-普及" class="headerlink" title="构建知识管理体系 - 普及"></a>构建知识管理体系 - 普及</h2><p>创建团队知识库是一个很简单的动作，只要在某个平台上创建一个团队，我们甚至就可以说创建完成了。然而搭建不同，搭建是一个持续一段时间的行为。搭建包括前期的准备、规划，后期的管理、完善等等，直至形成一个完整的可持续的体系</p>
+<img src="/2020/12/27/knowledge-manage02/page1.png" class="" title="普及知识管理">
+
+<p>普及知识管理体系可以分为四步:</p>
+<ul>
+<li>如何让团队知识管理体系长久地运营下去</li>
+<li>寻求团队认可</li>
+<li>先尝试个人知识管理等，认识到知识管理的有效性</li>
+<li>主动分享，持续普及知识管理</li>
+</ul>
+<h2 id="构建知识管理体系-规划"><a href="#构建知识管理体系-规划" class="headerlink" title="构建知识管理体系 - 规划"></a>构建知识管理体系 - 规划</h2><p><strong>规划</strong>是非常关键的一步，切勿提出要搭建团队知识管理体系后，只是简单地要求成员来上传自己的文档，后续就不再予以关注。这样不仅无法调动多数成员积极性，比较积极的一部分成员也只能按照自己的想法东拼西凑，最后搭建出一个非常混乱的体系。不仅耗费了积极成员的精力，还无法让他们得到任何成就感。</p>
+<img src="/2020/12/27/knowledge-manage02/page2.png" class="" title="规划知识管理">
+
+<h3 id="如何规划知识管理体系"><a href="#如何规划知识管理体系" class="headerlink" title="如何规划知识管理体系"></a>如何规划知识管理体系</h3><ul>
+<li><p>指定专人<br>如果要建立一个团队知识管理体系，一定要<strong>指定专人负责规划</strong>，职责到人才能够把事情做到位。至于如何制定具体的规则，可以结合难点，进行一场头脑风暴。不仅能够充分发挥团体的智慧，还能够了解每一个人的想法。</p>
+</li>
+<li><p>搭建知识架构<br><strong>搭建知识架构</strong>这件事非常重要。后期在要求成员扩充内容时，可能成员本人并不知道该写什么，就会以架构作为参考来选题。所以架构本身就带有指导的性质，切不可敷衍。</p>
+<img src="/2020/12/27/knowledge-manage02/page3.png" class="" title="搭建知识架构"></li>
+</ul>
+<h3 id="规划知识管理体系的难点"><a href="#规划知识管理体系的难点" class="headerlink" title="规划知识管理体系的难点"></a>规划知识管理体系的难点</h3><ul>
+<li>难点1：怎样把隐性知识显性化？</li>
+</ul>
+<blockquote>
+<p>隐性知识：指的是未被表述的知识，如技能、秘诀等<br>显性知识：以书面文字、图表和数学公式加以表述的知识，更加直观。</p>
+</blockquote>
+<p>怎样<strong>把隐性知识显性化</strong>，通俗地来说就是怎样把优秀人才的工作经验转化大家看得懂的文字或流程等。一个可考虑的方式，是在每一个项目或较复杂工作做成果总结的时候，规定项目负责人对整个过程进行一次复盘。即除了提交成果以外，还要对整个项目从头到尾进行一次梳理，归纳出优点和不足。这样其他成员也能够间接从中吸取到经验教训。</p>
+<ul>
+<li>难点2：如何快速找到对自己有用的信息？</li>
+</ul>
+<blockquote>
+<p>如何跟图书管理员一样快速找到自己想要的书籍呢？</p>
+</blockquote>
+<img src="/2020/12/27/knowledge-manage02/page4.png" class="" title="快速查找书籍">
+
+<p>团队知识库会随时间而扩大，当目录层级非常多的时候，如何找到所需的信息成了一大难题。如果不在归纳梳理上花功夫，知识库里的内容就容易成为一个“杂书间”，完全没有条理，来找“书”的人也根本无法找到对自己有用的“书”</p>
+<blockquote>
+<p>那么，我们如何才能快速找到对自己有用的信息呢</p>
+</blockquote>
+<h3 id="规划知识管理体系-分类架构"><a href="#规划知识管理体系-分类架构" class="headerlink" title="规划知识管理体系-分类架构"></a>规划知识管理体系-分类架构</h3><p>建立一个合理的分类架构，这件事情要由对团队工作所有相关领域都极熟悉的元老级人物来做。因为他们知道什么是合理构架，知道团队需要什么样的内容，知道什么样的内容具有复用性，会从更严谨的角度出发来搭建架构。新人不够熟悉业务领域，所以无法搭建起一个实用合理的知识架构。</p>
+<ul>
+<li>杜威十进制分类法<br>杜威十进制分类法是由美国图书馆专家麦尔威·杜威发明的图书分类法。在美国，几乎所有公共图书馆和学校图书馆都采用这种分类法。该分类法以三位数字代表分类码，共可分为10个大分类、100个中分类及1000个小分类。</li>
+</ul>
+<img src="/2020/12/27/knowledge-manage02/page5.png" class="" title="杜威十进制分类法">
+
+<ul>
+<li>PARA<br>PARA 是 Facebook 上一位 Notion 大 V 用的信息管理系统，把 Page 按照以下模块进行分类： P：Project，一个个与目标相关的项目；A：Area，一个个领域，我的理解就是你的身份角色；R：Resource，持续关注的主题；A：Archive，其他</li>
+</ul>
+<img src="/2020/12/27/knowledge-manage02/page6.png" class="" title="PARA">
+
+<p>在已经创建了分类架构的基础上，制作一张全局预览图。比较建议的方式是做一张可以实时更新的云端协作思维导图，随着知识库内容的增加而更新。团队成员想查找信息的时候，只要打开脑图就能够找到大概的位置。因为文件夹目录只能看到当下的一层，而要精准地找到某个文件，则需要看到完整的结构。</p>
+<img src="/2020/12/27/knowledge-manage02/page7.png" class="" title="全局预览图">
+
+<p>所以，完善的分类模式+脑图+准确标题&#x3D;快速查找</p>
+<img src="/2020/12/27/knowledge-manage02/page8.png" class="" title="如何快速查找">
+
+<h2 id="构建知识管理体系-管理与完善"><a href="#构建知识管理体系-管理与完善" class="headerlink" title="构建知识管理体系 - 管理与完善"></a>构建知识管理体系 - 管理与完善</h2><p>知识管理的模式可以分为硬管理和软管理</p>
+<blockquote>
+<p>硬管理：规划中制定的规则在实施中还会发现各种不完善的地方，需要在后期的实施中持续优化。甚至可以做A&#x2F;B 测试来观察不同的规则所带来的效果。规则方面，非常重要的一点是适度，不能让成员感到要求过分。这种用规则来进行约束的方法，可以称之为“硬管理”手段。</p>
+</blockquote>
+<blockquote>
+<p>软管理：与“硬管理”相对的还有“软管理”，指的是为达成目的所使用的非强制手段。在“软管理”中，管理者的作用十分关键。一方面能够起到表率作用：管理者自己分享一些经验、行业观察等，带起分享知识的风气。另一方面，管理者可以鼓励有潜力的成员，让员工感到被认可，从而主动分享自己的知识。还可以表扬对知识库贡献比较大的成员，增加他们的成就感，同时也让其他的成员愿意花心思来做这件事。</p>
+</blockquote>
+<p>为了更好得让同学们自发得去管理知识，最重要的是创造一个乐于分享的和谐氛围，让大家自发性地来分享知识，而不是因为被push才不得不写。</p>
+<p>为了养成这个氛围，管理者可以通过<strong>经济奖励</strong>和<strong>精神奖励</strong>的方式，来推动大家持续分享自己的知识。</p>
+<img src="/2020/12/27/knowledge-manage02/page9.png" class="" title="持续分享">
+
+<p>OK，知识管理的第二篇就到这里，主要介绍了如何构建知识管理体系，包括了普及、规划、管理和完善。下一篇将会给大家带来如何挑选知识管理平台，后会有期～～</p>
+
       
     </div>
 
@@ -1161,7 +1231,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1227,12 +1297,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
